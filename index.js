@@ -1,34 +1,24 @@
-const express = require("express"),
-    path = require("path"),
-    app = express(),
-    puerto = 3000;
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const port = 3000;
 
-app.get('/', (peticion, respuesta) => {
-    // Podemos acceder a la petición HTTP
-    let agenteDeUsuario = peticion.header("user-agent");
-    respuesta.send("La ruta / solicitada con: " + agenteDeUsuario);
-});
-app.get('/pagina', (peticion, respuesta) => {
-    // Servir archivo HTML, o cualquier otro archivo
-    let rutaDeArchivo = path.join(__dirname, "plantilla.html");
-    respuesta.sendFile(rutaDeArchivo);
-});
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-app.get('/hola', (peticion, respuesta) => {
-    let mascota = {
-        nombre: "Maggie",
-        edad: 2,
-    };
-    respuesta.json(mascota);
+// Routes
+const authRoutes = require("./routes/authRoutes");
+
+app.use("/auth", authRoutes);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal server error" });
 });
 
-// Una vez definidas nuestras rutas podemos iniciar el servidor
-app.listen(puerto, err => {
-    if (err) {
-        // Aquí manejar el error
-        console.error("Error escuchando: ", err);
-        return;
-    }
-    // Si no se detuvo arriba con el return, entonces todo va bien ;)
-    console.log(`Escuchando en el puerto :${puerto}`);
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
