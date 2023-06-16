@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("votaciones", "root", "", {
-  host: "localhost",
+const sequelize = new Sequelize("sisfivotedb", "admin", "sisfivot2023", {
+  host: "sisfivot.cuebcdfmq5mz.us-east-2.rds.amazonaws.com",
   dialect: "mysql",
 });
 
