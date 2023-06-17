@@ -2,29 +2,20 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("User", {
+    await queryInterface.createTable("VotingCenter", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      lastName: {
+      voters: {
         allowNull: false,
-        type: Sequelize.STRING,
-      },
-      username: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING,
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -35,11 +26,10 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-
-    await queryInterface.addColumn("Report", "userId", {
+    await queryInterface.addColumn("User", "votingCenterId", {
       type: Sequelize.INTEGER,
       references: {
-        model: "User",
+        model: "VotingCenter",
         key: "id",
       },
       onUpdate: "CASCADE",
@@ -48,7 +38,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn("Report", "userId");
-    await queryInterface.dropTable("User");
+    await queryInterface.removeColumn("User", "votingCenterId");
+    await queryInterface.dropTable("VotingCenter");
   },
 };
