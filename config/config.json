@@ -1,23 +1,23 @@
 {
     "development": {
-      "username": "root",
-      "password": null,
-      "database": "votaciones",
-      "host": "127.0.0.1",
+      "username": "admin",
+      "password": "sisfivot2023",
+      "database": "sisfivotedb",
+      "host": "sisfivot.cuebcdfmq5mz.us-east-2.rds.amazonaws.com",
       "dialect": "mysql"
     },
     "test": {
-      "username": "root",
-      "password": null,
-      "database": "votaciones",
-      "host": "127.0.0.1",
+      "username": "admin",
+      "password": "sisfivot2023",
+      "database": "sisfivotedb",
+      "host": "sisfivot.cuebcdfmq5mz.us-east-2.rds.amazonaws.com",
       "dialect": "mysql"
     },
     "production": {
-      "username": "root",
-      "password": null,
-      "database": "votaciones",
-      "host": "127.0.0.1",
+      "username": "admin",
+      "password": "sisfivot2023",
+      "database": "sisfivotedb",
+      "host": "sisfivot.cuebcdfmq5mz.us-east-2.rds.amazonaws.com",
       "dialect": "mysql"
     }
   }
