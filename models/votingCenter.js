@@ -19,7 +19,7 @@ const VotingCenter = sequelize.define(
     },
   },
   {
-    tableName: "votingcenter",
+    tableName: "VotingCenter",
   }
 );
 

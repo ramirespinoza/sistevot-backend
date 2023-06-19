@@ -23,12 +23,16 @@ const Report = sequelize.define(
     },
   },
   {
-    tableName: "report",
+    tableName: "Report",
   }
 );
 Report.associate = function (models) {
   Report.belongsTo(models.ReportType, {
     foreignKey: "reportTypeId",
+    onDelete: "SET NULL",
+  });
+  Report.belongsTo(models.User, {
+    foreignKey: "userId",
     onDelete: "SET NULL",
   });
 };

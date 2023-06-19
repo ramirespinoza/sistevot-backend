@@ -22,7 +22,6 @@ module.exports = {
         password: "sol409",
         roleId: 2,
         votingCenterId: 7,
-
         createdAt: new Date(),
         updatedAt: new Date(),
       },

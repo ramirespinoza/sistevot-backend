@@ -15,7 +15,7 @@ const Municipality = sequelize.define(
     },
   },
   {
-    tableName: "municipality",
+    tableName: "Municipality",
   }
 );
 
