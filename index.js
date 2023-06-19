@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
+app.use(fileUpload());
 app.use(express.json());
+
 
 // Routes
 const authRoutes = require("./routes/authRoutes");

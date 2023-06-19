@@ -11,7 +11,7 @@ const ReportType = sequelize.define(
     },
   },
   {
-    tableName: "reportType",
+    tableName: "ReportType",
   }
 );
 

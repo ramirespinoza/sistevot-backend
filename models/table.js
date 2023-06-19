@@ -11,7 +11,7 @@ const Table = sequelize.define(
     },
   },
   {
-    tableName: "table",
+    tableName: "Table",
   }
 );
 Table.associate = function (models) {};

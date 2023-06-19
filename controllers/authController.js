@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
       roleId,
       votingCenterId,
     });
-    res.status(201).json({ message: "Usuario registrado exitosamente", user });
+    res.status(201).json({ message: "Usuario registrado exitosamente" });
   } catch (error) {
     console.error("Error creating user", error);
     res.status(500).json({ message: "Error interno de servidor" });
@@ -45,6 +45,9 @@ exports.login = async (req, res) => {
     });
     const centerName = user.VotingCenter.name;
     const municipalityName = user.VotingCenter.Municipality.name;
+    const municipalityVoters = user.VotingCenter.Municipality.name;
+    const centerVoters = user.VotingCenter.Municipality.name;
+    const roleId = user.roleId;
 
     if (!user) {
       return res.status(401).json({ message: "Credenciales invalidas" });
@@ -52,12 +55,26 @@ exports.login = async (req, res) => {
 
     // Generate JWT token
     const token = jwt.sign(
-      { username, centerName, municipalityName },
+      {
+        username,
+        centerName,
+        municipalityName,
+        municipalityVoters,
+        centerVoters,
+        roleId,
+      },
       secretKey,
       { expiresIn: "8h" }
     );
 
-    res.json({ token });
+    res.json({
+      token,
+      centerName,
+      municipalityName,
+      municipalityVoters,
+      centerVoters,
+      roleId,
+    });
   } catch (error) {
     console.error("Error finding user", error);
     res.status(500).json({ message: "Internal server error" });

@@ -35,7 +35,7 @@ const User = sequelize.define(
     },
   },
   {
-    tableName: "user", // Specify the custom table name as 'user'
+    tableName: "User", // Specify the custom table name as 'user'
   }
 );
 User.associate = function (models) {
@@ -45,6 +45,7 @@ User.associate = function (models) {
     onDelete: "SET NULL",
   });
   User.belongsTo(models.Table, { foreignKey: "tableId", onDelete: "SET NULL" });
+  User.hasMany(models.Report, { foreignKey: "userId" });
 };
 
 module.exports = User;
