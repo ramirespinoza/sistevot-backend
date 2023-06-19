@@ -23,11 +23,17 @@ exports.getAll = async (req, res) => {
     }
 
     const reports = await Report.findAll({
-      include: {
-        model: User,
-        attributes: ["firstName", "lastName"],
-        where: whereClause, // Apply the filter on the relationship
-      },
+      include: [
+        {
+          model: User,
+          attributes: ["firstName", "lastName"],
+          where: whereClause, // Apply the filter on the relationship
+        },
+        {
+          model: ReportType,
+          attributes: ["name"],
+        },
+      ],
       where: reportWhereClause,
     });
 
