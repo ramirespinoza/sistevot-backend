@@ -14,14 +14,12 @@ app.use(express.json());
 const authRoutes = require("./routes/authRoutes");
 const municipalityRoutes = require("./routes/municipalityRoutes");
 const votingCenterRoutes = require("./routes/votingCenterRoutes");
-const roleRoutes = require("./routes/roleRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 
 app.use("/auth", authRoutes);
 app.use("/municipality", municipalityRoutes);
 app.use("/votingCenter", votingCenterRoutes);
 app.use("/report", reportRoutes);
-app.use("/role", roleRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
