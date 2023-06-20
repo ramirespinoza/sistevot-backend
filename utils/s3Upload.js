@@ -3,9 +3,9 @@ const fs = require("fs");
 
 // Configure AWS SDK with your access credentials
 AWS.config.update({
-  accessKeyId: "AKIAVFT3HWX4RQDEISH3",
-  secretAccessKey: "7lj/Mt/50ahA0DM7S8g/H0ySdGX0IY6LUZ62TQfV",
-  region: "us-east-1",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region:process.env.AWS_REGION,
 });
 
 const s3 = new AWS.S3();
