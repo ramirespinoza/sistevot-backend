@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
 const fs = require("fs");
-
+require('dotenv').config();
 // Configure AWS SDK with your access credentials
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
