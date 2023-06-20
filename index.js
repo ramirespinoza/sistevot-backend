@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const app = express();
+require('dotenv').config();
+
 const port = process.env.PORT || 3000;
 
 // Middleware
