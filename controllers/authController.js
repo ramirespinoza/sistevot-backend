@@ -84,3 +84,27 @@ exports.logout = async (req, res) => {
   res.clearCookie("token");
   res.json({ message: "Cerrada sesión exitosamente" });
 };
+
+exports.updateTableName = async (req, res) => {
+  const { tableName } = req.body;
+  const { user } = req; // Access the user from req.user
+  let username = await user;
+  username = username.username;
+  try {
+    // Find the user
+    const user = await User.findOne({ where: { username } });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update the tableName column
+    user.tableName = tableName;
+    await user.save();
+
+    res.json({ message: "tableName updated successfully" });
+  } catch (error) {
+    console.error("Error updating tableName", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

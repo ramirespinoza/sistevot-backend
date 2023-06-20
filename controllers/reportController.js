@@ -26,7 +26,7 @@ exports.getAll = async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["firstName", "lastName"],
+          attributes: ["firstName", "lastName", "tableName"],
           where: whereClause, // Apply the filter on the relationship
         },
         {

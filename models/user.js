@@ -17,6 +17,10 @@ const User = sequelize.define(
       allowNull: false,
       unique: true,
     },
+    tableName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,10 +29,7 @@ const User = sequelize.define(
       allowNull: true,
       type: DataTypes.INTEGER,
     },
-    tableId: {
-      allowNull: true,
-      type: DataTypes.INTEGER,
-    },
+
     votingCenterId: {
       allowNull: true,
       type: DataTypes.INTEGER,
@@ -44,7 +45,6 @@ User.associate = function (models) {
     foreignKey: "votingCenterId",
     onDelete: "SET NULL",
   });
-  User.belongsTo(models.Table, { foreignKey: "tableId", onDelete: "SET NULL" });
   User.hasMany(models.Report, { foreignKey: "userId" });
 };
 
