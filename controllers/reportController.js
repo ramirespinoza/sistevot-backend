@@ -48,29 +48,25 @@ exports.registerReport = async (req, res) => {
   try {
     const { description, reportTypeId } = req.body;
     const { user } = req; // Access the user from req.user
-    let userId = await user;
-    userId = userId.id;
-
-    const fileContent = Buffer.from(req.files.file.data, "binary");
     const reportType = await ReportType.findOne({
       where: { id: reportTypeId },
     });
+    let userId = await user;
+    let imageUrl = "";
+    userId = userId.id;
+    if (req.files) {
+      const currentDate = new Date();
+      const day = String(currentDate.getDate()).padStart(2, "0");
+      const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+      const year = String(currentDate.getFullYear());
+      const hours = String(currentDate.getHours()).padStart(2, "0");
+      const minutes = String(currentDate.getMinutes()).padStart(2, "0");
+      const formattedDateTime = `${day}-${month}-${year} ${hours}:${minutes}`;
 
-    const currentDate = new Date();
-    const day = String(currentDate.getDate()).padStart(2, "0");
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
-    const year = String(currentDate.getFullYear());
-    const hours = String(currentDate.getHours()).padStart(2, "0");
-    const minutes = String(currentDate.getMinutes()).padStart(2, "0");
-    const formattedDateTime = `${day}-${month}-${year} ${hours}:${minutes}`;
-
-    const imageFileName = `${reportType.name}-${formattedDateTime}-${req.files.file.name}`;
-    const imageUrl = await uploadFileToS3(
-      fileContent,
-      imageFileName,
-      bucketName
-    );
-
+      const fileContent = Buffer.from(req.files.file.data, "binary");
+      const imageFileName = `${reportType.name}-${formattedDateTime}-${req.files.file.name}`;
+      imageUrl = await uploadFileToS3(fileContent, imageFileName, bucketName);
+    }
     // Create a new report
     const newReport = await Report.create({
       description,
