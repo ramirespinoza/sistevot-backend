@@ -1,11 +1,11 @@
 const AWS = require("aws-sdk");
 const fs = require("fs");
-require('dotenv').config();
+require("dotenv").config();
 // Configure AWS SDK with your access credentials
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region:process.env.AWS_REGION,
+  region: process.env.AWS_REGION,
 });
 
 const s3 = new AWS.S3();
@@ -24,7 +24,7 @@ const uploadFileToS3 = (fileData, fileName, bucketName) => {
     // Set the S3 upload parameters
     const params = {
       Bucket: bucketName,
-      Key: fileName,
+      Key: `img/${fileName}`,
       Body: fileData,
       ACL: "public-read", // Set the file ACL to public-read for public access
     };
